@@ -56,15 +56,18 @@ void printDataAsHex(unsigned char *data, size_t size) {
             printf(" %x%x", firstHex, secondHex);
         }
         else {
-            printf("%x%x ", firstHex, secondHex);
+            printf("%x%x", firstHex, secondHex);
         }
     }
-
+    
     while (byte < 16) {
-        printf("   ");
+        printf("  ");
+        if (byte % 2 == 0) {
+            printf(" ");
+        }
         byte++;
     }
-
+  
 }
 
 /**
@@ -84,6 +87,9 @@ void printDataAsChars(unsigned char *data, size_t size) {
         else if (ascii  > 126) {
             ascii = 46;
         }
+        if (i == 0 && ascii == 32) {
+            continue;
+        }
         printf("%c", ascii);
     }
 }
@@ -101,7 +107,7 @@ void printDataAsBits(unsigned char *data, size_t size) {
     for (byte = 0; byte < size; byte++) {
         int decimal = data[byte];
         int bits[8];
-
+        
         for (int i = 7; i >= 0; i--) {
             if (decimal % 2 == 1) {
                 bits[i] = 1;
@@ -115,7 +121,7 @@ void printDataAsBits(unsigned char *data, size_t size) {
             printf("%d", bits[i]);
         }
     }
-
+    
     while (byte < 6) {
         printf("         ");
         byte++;
